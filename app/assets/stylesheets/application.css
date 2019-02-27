@@ -51,7 +51,7 @@ footer {
 
 /* item */
 .item .panel-body {
-  height: 70px;
+  height:120px;
 }
 .item .panel-heading {
   height: 250px;
@@ -66,4 +66,9 @@ p.item-title {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+}
+
+.item .buttons form {
+  display: inline-block;
+  margin: 0 5px;
 }

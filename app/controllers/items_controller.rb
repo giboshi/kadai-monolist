@@ -1,4 +1,9 @@
 class ItemsController < ApplicationController
+  def show
+    @item = Item.find(params[:id])
+    @want_users = @item.want_users
+  end
+  
   def new
     @items = []
 
@@ -12,7 +17,7 @@ class ItemsController < ApplicationController
 
       results.each do |result|
         # 扱い易いように Item としてインスタンスを作成する（保存はしない）
-        item = Item.new(read(result))
+        item = Item.find_or_initialize_by(read(result))
         @items << item #itemを[]に追加
       end
     end
@@ -20,17 +25,5 @@ class ItemsController < ApplicationController
   
   private
 
-  def read(result)
-    code = result['itemCode']
-    name = result['itemName']
-    url = result['itemUrl']
-    image_url = result['mediumImageUrls'].first['imageUrl'].gsub('?_ex=128x128', '')#画像 URL 末尾に含まれる ?_ex=128x128 を削除
-
-    {
-      code: code,
-      name: name,
-      url: url,
-      image_url: image_url,
-    }
-  end
+  
 end
